@@ -24,7 +24,7 @@ public class PaymentController {
         return ResponseEntity.status(HttpStatus.CREATED).body("Payment successful, refNo: " + savedPayment.getId());
     }
 
-    @PostMapping("/getAll")
+    @GetMapping("/getAll")
     public ResponseEntity<List<Payment>> getAllPayments() {
         return ResponseEntity.ok(paymentService.getAllPayments());
     }
@@ -38,5 +38,8 @@ public class PaymentController {
     public ResponseEntity<List<Payment>> getPaymentByUserId(@PathVariable Long userId) {
         return ResponseEntity.ok(paymentService.getPaymentsByUserId(userId));
     }
-
+    @PostMapping("/processPayment/{paymentId}")
+    public ResponseEntity<Payment> processPayment(@PathVariable Long paymentId){ 
+        return ResponseEntity.ok(paymentService.processPayment(paymentId));
+    }
 }
